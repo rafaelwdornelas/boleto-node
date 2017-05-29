@@ -94,6 +94,7 @@
 	.w132{width:132px}
 	.w134{width:134px}
 	.w150{width:150px}
+	.w152{width:152px}
 	.w163{width:163px}
 	.w164{width:164px}
 	.w180{width:180px}
@@ -149,7 +150,7 @@
 		</head>
 		<body>
 			<div>
-				<table class="w666">
+				<table class="w666 no-print">
 					<tr class="cpN">
 						<td class="At Ac">Instruções de Impressão</td>
 					</tr>
@@ -227,7 +228,7 @@
 						<td class="w659">Pagador</td>
 					</tr>
 					<tr class="cp h12">
-						<td><%- boleto['pagador'] || '' %></td>
+						<td><%-  boleto['pagador'] + '<br />CPF/CNPJ: ' + boleto['pagador_cpf_cnpj'] + " <br /> " + boleto['pagador_endereco'] || '' %></td>
 					</tr>
 					<tr class="cp h12 rBb">
 						<td></td>
@@ -277,10 +278,10 @@
 				</table><table class="w666">
 					<tr class="ct h13">
 						<td class="w113">Data do documento</td>
-						<td class="w163">N<u>o</u> documento</td>
+						<td class="w152">N<u>o</u> documento</td>
 						<td class="w62">Espécie doc.</td>
 						<td class="w34">Aceite</td>
-						<td class="w72">Data processamento</td>
+						<td class="w83">Data processamento</td>
 						<td class="w180">Carteira / Nosso número</td>
 					</tr>
 					<tr class="cp h12 rBb">
@@ -332,7 +333,7 @@
 						<td class="w659">Pagador</td>
 					</tr>
 					<tr class="cp h12">
-						<td class="At"><%- boleto['pagador'] || '' %></td>
+						<td class="At"><%-  boleto['pagador'] + '<br />CPF/CNPJ: ' + boleto['pagador_cpf_cnpj'] + " <br /> " + boleto['pagador_endereco'] || '' %></td>
 					</tr>
 				</table><table class="w666">
 					<tr class="rBb">

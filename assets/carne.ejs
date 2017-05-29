@@ -65,6 +65,15 @@
 		margin-bottom: 10px;
 	}
 
+	.corte-linha-pontilhada{
+		color: #000033;
+		font: 9px Arial;
+		width: 100%;
+		border:0;
+		text-align: right;
+		margin-bottom: 10px;
+	}
+
 	.table-boleto .conteudo {
 		font: bold 10px Arial;
 		height: 13px;
@@ -343,10 +352,42 @@
 					display: none !important;
 				}
 			}
+
+			/* grid */
+			.grid-container{
+				width: 100%;
+				max-width: 1200px;
+			}
+
+			/*-- our cleafix hack -- */
+			.row:before,
+			.row:after {
+				content:"";
+				display: table ;
+				clear:both;
+			}
+
+			[class*='col-'] {
+				float: left !important;
+				min-height: 1px !important;
+				width: 16.66% !important;
+				/*-- our gutter -- */
+				padding: 12px !important;
+				margin: -12px;
+			}
+
+			.col-1{ width: 16.66% !important; }
+			.col-2{ width: 33.33% !important; }
+			.col-3{ width: 50% !important;    }
+			.col-4{ width: 66.66% !important; }
+			.col-5{ width: 83.33% !important; }
+			.col-6{ width: 100% !important;   }
+
 			</style>
 		</head>
 		<body>
-			<table style='width:863px;'>
+
+			<table style='width:863px;' class='no-print'>
 				<tr class="cpN">
 					<td class="At Ac">Instruções de Impressão</td>
 				</tr>
@@ -367,7 +408,6 @@
 					<td class="ctN cut" />
 				</tr>
 			</table>
-			<br />
 			<div style="width: 863px">
 				<div style="float: left; margin-top:6px;">
 					<span class="header">Recibo do Sacado</span>
@@ -376,6 +416,12 @@
 							<td>
 								<div class="titulo">Beneficiário</div>
 								<div class="conteudo" style='height:100%;'><%= boleto['cedente'] %></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="titulo">CNPJ</div>
+								<div class="conteudo" style='height:100%;'><%= boleto['cedente_cnpj'] %></div>
 							</td>
 						</tr>
 						<tr>
@@ -394,24 +440,6 @@
 							<td>
 								<div class="titulo">Nosso número</div>
 								<div class="conteudo"><%= addTrailingZeros(boleto['nosso_numero'], 12) %>-<%= boleto['nosso_numero_dv'] %></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="titulo">Nº documento</div>
-								<div class="conteudo"><%= addTrailingZeros(boleto['numero_documento'], 9) %></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="titulo">Espécie</div>
-								<div class="conteudo">DM</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="titulo">Quantidade</div>
-								<div class="conteudo">&nbsp;</div>
 							</td>
 						</tr>
 						<tr>
@@ -445,6 +473,12 @@
 							</td>
 						</tr>
 						<tr>
+							<td>
+								<div class="titulo">Sacado</div>
+								<div class="conteudo"><%- boleto['pagador'] || '' %></div>
+							</td>
+						</tr>
+						<tr>
 							<td class="bottomborder">
 								<div class="titulo">(=) Valor cobrado</div>
 								<div class="conteudo"><%= formatAmount(boleto['valor_cobrado']) %></div>
@@ -452,7 +486,7 @@
 						</tr>
 					</table>
 				</div>
-				<div style="float: left; margin-left: 15px">
+				<div style="float: left; margin-left: 8px; padding-left:7px; border-left:1px dashed #000;">
 					<table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
 						<tbody>
 							<tr>
@@ -549,8 +583,8 @@
 							</tr>
 							<tr>
 								<td colspan="7" class="notopborder">
-									<div class="conteudo"><%- boleto['instrucoes'] %></div>
-									<div class="conteudo">Lorem ipsum Instruções</div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[0] || "" %></div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[1] || "" %></div>
 								</td>
 								<td>
 									<div class="titulo">(-) Outras deduções</div>
@@ -559,8 +593,8 @@
 							</tr>
 							<tr>
 								<td colspan="7" class="notopborder">
-									<div class="conteudo">Lorem ipsum Instruções</div>
-									<div class="conteudo">Lorem ipsum Instruções</div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[2] || "" %></div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[3] || "" %></div>
 								</td>
 								<td>
 									<div class="titulo">(+) Mora / Multa</div>
@@ -569,8 +603,8 @@
 							</tr>
 							<tr>
 								<td colspan="7" class="notopborder">
-									<div class="conteudo">Lorem ipsum Instruções</div>
-									<div class="conteudo">Lorem ipsum Instruções</div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[4] || "" %></div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[5] || "" %></div>
 								</td>
 								<td>
 									<div class="titulo">(+) Outros acréscimos</div>
@@ -579,8 +613,8 @@
 							</tr>
 							<tr>
 								<td colspan="7" class="notopborder">
-									<div class="conteudo">Lorem ipsum Instruções</div>
-									<div class="conteudo">Lorem ipsum Instruções</div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[6] || "" %></div>
+									<div class="conteudo"><%- boleto['instrucoes'].split(/\n/)[7] || "" %></div>
 								</td>
 								<td>
 									<div class="titulo">(=) Valor cobrado</div>
@@ -588,15 +622,26 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="7">
+								<td colspan="8">
 									<div class="titulo">Sacado</div>
-									<div class="conteudo"><%- boleto['pagador'] || '' %>></div>
-									<div class="conteudo">Endereço Sacado 1</div>
-									<div class="conteudo">Endereco Sacado 2</div>
-
-								</td>
-								<td class="noleftborder">
-									<div class="titulo" style="margin-top: 50px">Cód. Baixa</div>
+									<div class='grid-container' style='width:100%'>
+										<div class='row'>
+											<div class='col-4'>
+												<div class="conteudo"><%- boleto['pagador'] || '' %></div>
+											</div>
+											<div class='col-2'>
+												<div class="conteudo">CPF/CNPJ: <%- boleto['pagador_cpf_cnpj'] || '' %></div>
+											</div>
+										</div>
+										<div class='row'>
+											<div class='col-4'>
+												<div class="conteudo"><%- boleto['pagador_endereco'] || '' %></div>
+											</div>
+											<div class='col-2'>
+												<div class="conteudo"><%- boleto['pagador_outras_informacoes'] || '' %></div>
+											</div>
+										</div>
+									</div>
 								</td>
 							</tr>
 
@@ -611,7 +656,7 @@
 
 							<tr>
 
-								<td colspan='8' class=" noborder EcdBar Al pL10" style='padding-left:0; padding-top:3px; padding-bottom:8px;margin:0;'>
+								<td colspan='8' class=" noborder EcdBar Al pL10" style='padding-left:0; padding-top:3px; padding-bottom:2px;margin:0;'>
 									<% if (barcode_render_engine == 'bmp') { %>
 										<div class="barcode"/>
 										<% } else if (barcode_render_engine == 'img') { %>
@@ -633,7 +678,12 @@
 								</table>
 							</div>
 							<div style="clear: both"></div>
-							<div class="linha-pontilhada">Corte na linha pontilhada</div>
+							<table style='width:863px;'>
+								<tr>
+									<td class="ctN cut" />
+								</tr>
+							</table>
+							<div class="corte-linha-pontilhada">Corte na linha pontilhada</div>
 						</div>
 					</body>
 					</html>
