@@ -1,5 +1,5 @@
 {
-  "name": "node-boleto",
+  "name": "boleto-node",
   "version": "2.0.2",
   "description": "Boleto generator in Node.js",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pagarme/node-boleto"
+    "url": "https://github.com/pagarme/boleto-node"
   },
   "dependencies": {
     "ejs": "2.5.5"
@@ -29,7 +29,7 @@
   "author": "Pedro Franceschi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pagarme/node-boleto/issues"
+    "url": "https://github.com/pagarme/boleto-node/issues"
   },
-  "homepage": "https://github.com/pagarme/node-boleto"
+  "homepage": "https://github.com/pagarme/boleto-node"
 }
