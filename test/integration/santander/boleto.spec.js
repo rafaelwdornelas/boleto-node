@@ -1,3 +1,5 @@
+'use strict'
+
 const Boleto = require('../../../index').Boleto
 
 const expect = require('chai').expect
@@ -42,4 +44,3 @@ describe('Santander Boleto', () => {
     })
   })
 })
-

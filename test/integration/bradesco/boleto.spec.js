@@ -1,3 +1,5 @@
+'use strict'
+
 const Boleto = require('../../../index').Boleto
 
 const expect = require('chai').expect
@@ -16,7 +18,7 @@ describe('Bradesco Boleto', () => {
         'cedente': 'Pagar.me Pagamentos S/A',
         'cedente_cnpj': '18727053000174',
         'agencia': '1229',
-        'codigo_cedente': '469',
+        'codigo_cedente': '001.789-4',
         'carteira': '25',
         'pagador': 'Nome do pagador\nCPF: 000.000.000-00',
         'local_de_pagamento': 'PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.',
@@ -34,11 +36,11 @@ describe('Bradesco Boleto', () => {
     })
 
     it('contains correct barcode_data', () => {
-      expect(boleto.barcode_data).to.equal('23794703000000015001229250000000000600004690')
+      expect(boleto.barcode_data).to.equal('23798703000000015001229250000000000600017890')
     })
 
     it('contains correct linha_digitavel', () => {
-      expect(boleto.linha_digitavel).to.equal('23791.22928 50000.000005 06000.046901 4 70300000001500')
+      expect(boleto.linha_digitavel).to.equal('23791.22928 50000.000005 06000.178902 8 70300000001500')
     })
   })
 })
