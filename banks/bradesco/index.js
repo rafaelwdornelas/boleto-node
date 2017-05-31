@@ -22,7 +22,7 @@ exports.barcodeData = function (boleto) {
 
   var valor = formatters.addTrailingZeros(boleto['valor'], 10)
   var carteira = boleto['carteira']
-  var codigoCedente = formatters.addTrailingZeros(boleto['codigo_cedente'], 7)
+  var codigoCedente = formatters.addTrailingZeros(boleto['codigo_cedente'].substring(0, boleto['codigo_cedente'].length -1).replace(/\D/g, ''), 7)
 
   var nossoNumero = carteira + formatters.addTrailingZeros(boleto['nosso_numero'], 11)
 
