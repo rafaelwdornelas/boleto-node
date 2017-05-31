@@ -622,24 +622,43 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="8">
+								<td colspan="7">
 									<div class="titulo">Sacado</div>
 									<div class='grid-container' style='width:100%'>
 										<div class='row'>
-											<div class='col-4'>
+											<div class='col-6'>
 												<div class="conteudo"><%- boleto['pagador'] || '' %></div>
 											</div>
-											<div class='col-2'>
+										</div>
+										<div class='row'>
+											<div class='col-3'>
+												<div class="conteudo"><%- boleto['pagador_endereco_rua_num'] || '' %></div>
+											</div>
+											<div class='col-3'>
+												<div class='conteudo Ar'>
+													<%- boleto['pagador_endereco_bairro'] || '' %>
+												</div>
+											</div>
+										</div>
+										<div class='row'>
+											<div class='col-3'>
+												<div class="conteudo"><%- boleto['pagador_endereco_cep'] || '' %></div>
+											</div>
+											<div class='col-3 Ar'>
+												<div class="conteudo"><%- boleto['pagador_endereco_cidade_estado'] || '' %></div>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style='border-left:0'>
+									<div class='grid-container'>
+										<div class='row'>
+											<div class='col-6'>
 												<div class="conteudo">CPF/CNPJ: <%- boleto['pagador_cpf_cnpj'] || '' %></div>
 											</div>
 										</div>
 										<div class='row'>
-											<div class='col-4'>
-												<div class="conteudo"><%- boleto['pagador_endereco'] || '' %></div>
-											</div>
-											<div class='col-2'>
-												<div class="conteudo"><%- boleto['pagador_outras_informacoes'] || '' %></div>
-											</div>
+											<div class="conteudo"><%- boleto['pagador_outras_informacoes'] || '' %></div>
 										</div>
 									</div>
 								</td>
@@ -654,7 +673,7 @@
 								</td>
 							</tr>
 
-							<tr>
+							<!--<tr>
 
 								<td colspan='8' class=" noborder EcdBar Al pL10" style='padding-left:0; padding-top:3px; padding-bottom:2px;margin:0;'>
 									<% if (barcode_render_engine == 'bmp') { %>
@@ -672,7 +691,25 @@
 												<% } %>
 											</td>
 
-										</tr>
+										</tr> -->
+
+										<tr>
+											<td colspan='8' class=" noborder EcdBar Al pL10" style='padding-left:0; padding-top:3px; padding-bottom:2px;margin:0;'>
+												<% if (barcode_render_engine == 'bmp') { %>
+													<div class="barcode"/>
+													<% } else if (barcode_render_engine == 'img') { %>
+														<div class="barcode">
+														<% var black = true; %>
+
+														<% for(var i = 0; i < barcode_data.length; i++) { %>
+															<% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
+															<div class="barcode-line" style="background-color:<%= black ? '#000' : '#fff' %>; height: <%= barcode_height %>px; width: <%= pixelsToDraw %>px;"></div>
+															<% black = !black; %>
+															<% } %>
+															</div>
+															<% } %>
+														</td>
+													</tr>
 
 									</tbody>
 								</table>

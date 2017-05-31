@@ -150,7 +150,7 @@
 		</head>
 		<body>
 			<div>
-				<table class="w666 no-print">
+				<table class="w666">
 					<tr class="cpN">
 						<td class="At Ac">Instruções de Impressão</td>
 					</tr>
@@ -228,10 +228,18 @@
 						<td class="w659">Pagador</td>
 					</tr>
 					<tr class="cp h12">
-						<td><%-  boleto['pagador'] + '<br />CPF/CNPJ: ' + boleto['pagador_cpf_cnpj'] + " <br /> " + boleto['pagador_endereco'] || '' %></td>
+						<td class="At"><%- boleto['pagador']  + ' - CPF/CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %></td>
 					</tr>
-					<tr class="cp h12 rBb">
-						<td></td>
+					<tr class="cp h12">
+						<td class='At'>
+							<%- boleto['pagador_endereco_rua_num'] || '' %>
+						</td>
+					</tr>
+					<tr class="cp h12">
+
+						<td class='At'>
+							<%- boleto['pagador_endereco_cep'] + ' ' + boleto['pagador_endereco_cidade_estado'] || '' %>
+						</td>
 					</tr>
 				</table><table class="w666">
 					<tr class="ctN h13">
@@ -333,7 +341,17 @@
 						<td class="w659">Pagador</td>
 					</tr>
 					<tr class="cp h12">
-						<td class="At"><%-  boleto['pagador'] + '<br />CPF/CNPJ: ' + boleto['pagador_cpf_cnpj'] + " <br /> " + boleto['pagador_endereco'] || '' %></td>
+						<td class="At"><%- boleto['pagador']  + ' - CPF/CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %></td>
+					</tr>
+					<tr class="cp h12">
+						<td class='At'>
+							<%- boleto['pagador_endereco_rua_num'] || '' %>
+						</td>
+					</tr>
+					<tr class="cp h12">
+						<td class='At'>
+							<%- boleto['pagador_endereco_cep'] + ' ' + boleto['pagador_endereco_cidade_estado'] || '' %>
+						</td>
 					</tr>
 				</table><table class="w666">
 					<tr class="rBb">
@@ -351,93 +369,112 @@
 					</tr>
 					<tr class="h13"><td colspan="3" /></tr>
 				</table><table class="w666">
-					<tr>
-						<td class="EcdBar Al pL10">
-							<% if (barcode_render_engine == 'bmp') { %>
-								<div class="barcode"/>
-								<% } else if (barcode_render_engine == 'img') { %>
-									<div class="barcode">
-									<% var black = true; %>
+					<!-- a renderização por imagens não funciona direito quando imprimimos pelo google chrome, então criei uma div com o background nas cores das
+							barras para que a impressão fosse correta -->
+					<!--<tr>
+					<td class="EcdBar Al pL10">
+					<% if (barcode_render_engine == 'bmp') { %>
+					<div class="barcode"/>
+					<% } else if (barcode_render_engine == 'img') { %>
+					<div class="barcode">
+					<% var black = true; %>
 
-									<% for(var i = 0; i < barcode_data.length; i++) { %>
-										<% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
-										<img class="barcode-line" src="https://assets.pagar.me/boleto/images/<%= black ? 'b' : 'w' %>.png" height="<%= barcode_height %>px" width="<%= pixelsToDraw %>px;" border=0/>
-										<% black = !black; %>
-										<% } %>
-										</div>
-										<% } %>
-									</td>
-								</tr>
-							</table><table class="ctN w666">
-								<tr class="h13"><td /></tr>
-								<tr><td class="Ar">Corte na linha pontilhada</td></tr>
-								<tr><td class="cut" /></tr>
-							</table>
-							<table class="ctN w666">
-								<tr class="h13"><td /></tr>
-								<tr class="h13"><td /></tr>
-								<tr class="h13"><td /></tr>
-								<tr class="h13"><td /></tr>
-								<tr class="h13"><td /></tr>
-								<tr class="h13"><td /></tr>
-							</table>
+					<% for(var i = 0; i < barcode_data.length; i++) { %>
+					<% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
+					<img class="barcode-line" src="https://assets.pagar.me/boleto/images/<%= black ? 'b' : 'w' %>.png" height="<%= barcode_height %>px" width="<%= pixelsToDraw %>px;" border=0/>
+					<% black = !black; %>
+					<% } %>
+				</div>
+				<% } %>
+			</td>
+		</tr>-->
+		<tr>
+			<td class="EcdBar Al pL10">
+				<% if (barcode_render_engine == 'bmp') { %>
+					<div class="barcode"/>
+					<% } else if (barcode_render_engine == 'img') { %>
+						<div class="barcode">
+						<% var black = true; %>
 
-						</div>
+						<% for(var i = 0; i < barcode_data.length; i++) { %>
+							<% var pixelsToDraw = (barcode_data[i] == "0") ? 1 : 3; %>
+							<div class="barcode-line" style="background-color:<%= black ? '#000' : '#fff' %>; height: <%= barcode_height %>px; width: <%= pixelsToDraw %>px;"></div>
+							<% black = !black; %>
+							<% } %>
+							</div>
+							<% } %>
+						</td>
+					</tr>
+				</table><table class="ctN w666">
+					<tr class="h13"><td /></tr>
+					<tr><td class="Ar">Corte na linha pontilhada</td></tr>
+					<tr><td class="cut" /></tr>
+				</table>
+				<table class="ctN w666">
+					<tr class="h13"><td /></tr>
+					<tr class="h13"><td /></tr>
+					<tr class="h13"><td /></tr>
+					<tr class="h13"><td /></tr>
+					<tr class="h13"><td /></tr>
+					<tr class="h13"><td /></tr>
+				</table>
 
-						<script>
-						(function () {
-							var onLoadDocumentElement
-							var onLoadDocumentCopy
+			</div>
 
-							onDOMReady(function () {
-								onLoadDocumentCopy = document.body.children[0].outerHTML
-								onLoadDocumentElement = hashString(onLoadDocumentCopy);
+			<script>
+			(function () {
+				var onLoadDocumentElement
+				var onLoadDocumentCopy
 
-								onDOMChange(function () {
-									document.body.innerHTML = onLoadDocumentCopy;
-								})
-							})
+				onDOMReady(function () {
+					onLoadDocumentCopy = document.body.children[0].outerHTML
+					onLoadDocumentElement = hashString(onLoadDocumentCopy);
 
-							function onDOMReady(callback) {
-								if (document.readyState === 'complete') return callback();
+					onDOMChange(function () {
+						document.body.innerHTML = onLoadDocumentCopy;
+					})
+				})
 
-								setTimeout(function () {
-									onDOMReady(callback);
-								}, 5);
-							}
+				function onDOMReady(callback) {
+					if (document.readyState === 'complete') return callback();
 
-							function onDOMChange (callback) {
-								var childContent = document.body.children[0];
+					setTimeout(function () {
+						onDOMReady(callback);
+					}, 5);
+				}
 
-								if (childContent) {
-									var currentDocumentElement = hashString(childContent.outerHTML);
+				function onDOMChange (callback) {
+					var childContent = document.body.children[0];
 
-									if (onLoadDocumentElement !== currentDocumentElement) {
-										callback();
-									}
-								} else {
-									callback();
-								}
+					if (childContent) {
+						var currentDocumentElement = hashString(childContent.outerHTML);
 
-								setTimeout(function () {
-									onDOMChange(callback);
-								}, 150);
-							}
+						if (onLoadDocumentElement !== currentDocumentElement) {
+							callback();
+						}
+					} else {
+						callback();
+					}
 
-							function hashString (value) {
-								var hash = 0;
+					setTimeout(function () {
+						onDOMChange(callback);
+					}, 150);
+				}
 
-								if (value.length === 0) return hash;
+				function hashString (value) {
+					var hash = 0;
 
-								for (i = 0; i < value.length; i++) {
-									char = value.charCodeAt(i);
-									hash = ((hash<<5)-hash)+char;
-									hash = hash & hash // Convert to 32bit integer
-								}
+					if (value.length === 0) return hash;
 
-								return hash;
-							}
-						})()
-						</script>
-					</body>
-					</html>
+					for (i = 0; i < value.length; i++) {
+						char = value.charCodeAt(i);
+						hash = ((hash<<5)-hash)+char;
+						hash = hash & hash // Convert to 32bit integer
+					}
+
+					return hash;
+				}
+			})()
+			</script>
+		</body>
+		</html>
