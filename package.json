@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pagarme/boleto-node"
+    "url": "https://github.com/bruno-sartori/boleto-node"
   },
   "dependencies": {
     "ejs": "2.5.5"
