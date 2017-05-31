@@ -24,22 +24,30 @@ Emitindo um boleto:
 var Boleto = require('boleto-node').Boleto;
 
 var boleto = new Boleto({
-  'banco': "santander", // nome do banco dentro da pasta 'banks'
-  'data_emissao': new Date(),
-  'data_vencimento': new Date(new Date().getTime() + 5 * 24 * 3600 * 1000), // 5 dias futuramente
-  'valor': 1500, // R$ 15,00 (valor em centavos)
-  'nosso_numero': "1234567",
-  'numero_documento': "123123",
-  'cedente': "Pagar.me Pagamentos S/A",
-  'cedente_cnpj': "18727053000174", // sem pontos e traços
-  'agencia': "3978",
-  'codigo_cedente': "6404154", // PSK (código da carteira)
-  'carteira': "102"
+	'banco': 'bradesco', // nome do banco dentro da pasta 'banks'
+	'data_emissao': new Date(),
+   'data_vencimento': new Date(new Date().getTime() + 5 * 24 * 3600 * 1000), // 5 dias futuramente
+	'valor': 8990, // R$ 15,00 (valor em centavos)
+	'nosso_numero': "1234567",
+	'numero_documento': "123123",
+	'instrucoes': "Não receber após vencimento. \n Multa de 2% após o vencimento. Juros de 0,03% de mora ao dia.", // separar cada linha por \n
+	'pagador': "TESTE DA SILVA",
+	'pagador_cpf_cnpj': '288.664.364-53',
+	'pagador_endereco_rua_num': 'RUA SÃO CARLOS AUGUSTINO DA SILVA, 50',
+	'pagador_endereco_bairro': 'SÃO JOÃO BATISTA DA SILVA',
+	'pagador_endereco_cep': '15.160-100',
+	'pagador_endereco_cidade_estado': 'SÃO JOSÉ DOS TESTES - SP',
+	'pagador_outras_informacoes': 'Login da central: testeteste',
+	'cedente': "PAGAMENTOS LTDA",
+	'cedente_cnpj': "47322759000154", // sem pontos e traços
+	'agencia': "6119",
+	'codigo_cedente':"001.584-2",
+	'carteira': "09"
 });
 
 console.log("Linha digitável: " + boleto['linha_digitavel'])
 
-boleto.renderHTML(function(html){
+boleto.renderHTML('boleto', function(html){ // layout do boleto: boleto ou carne
   console.log(html);
 });
 ```
@@ -62,7 +70,9 @@ console.log(parsedFile.boletos);
 
 ## Renderização do código de barras
 
-Atualmente, há duas maneiras de renderizar o código de barras: `img` e `bmp`.
+### Renderização antiga
+
+Havia duas maneiras de renderizar o código de barras: `img` e `bmp`.
 
 A engine `img` utiliza imagens brancas e pretas intercaladas para gerar o código de barras. Dessa forma, todos os browsers desde o IE6 são suportados. Esse modo de renderização, porém, é um pouco mais pesado, já que muitas `divs` são inseridas no HTML para a renderização.
 
@@ -73,6 +83,10 @@ Para alterar a engine de renderização padrão:
 ```javascript
 Boleto.barcodeRenderEngine = 'bmp';
 ```
+
+### Renderização atual - Em desenvolvimento
+Infelizmente alguns browsers não estavam renderizando os códigos de barras de forma correta na hora de imprimir, então a renderização do código de barras foi alterado para que ao
+invés de criar várias imagens das barras, criasse várias divs com o background branco ou preto, assim o problema de renderização no google chrome foi resolvido.
 
 ## Licença
 
