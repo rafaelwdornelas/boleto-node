@@ -145,12 +145,48 @@
 				{
 					display: none !important;
 				}
+
+				@page{margin-top:0; margin-bottom: 0;}
 			}
+			.capitalize{
+				text-transform: capitalize !important;
+			}
+
+			/* grid */
+			.grid-container{
+				width: 100%;
+				max-width: 1200px;
+			}
+
+			/*-- our cleafix hack -- */
+			.row:before,
+			.row:after {
+				content:"";
+				display: table ;
+				clear:both;
+			}
+
+			[class*='col-'] {
+				float: left !important;
+				min-height: 1px !important;
+				width: 16.66% !important;
+				/*-- our gutter -- */
+				padding: 12px !important;
+				margin: -12px;
+			}
+
+			.col-1{ width: 16.66% !important; }
+			.col-2{ width: 33.33% !important; }
+			.col-3{ width: 50% !important;    }
+			.col-4{ width: 66.66% !important; }
+			.col-5{ width: 83.33% !important; }
+			.col-6{ width: 100% !important;   }
+
 			</style>
 		</head>
 		<body>
 			<div>
-				<table class="w666">
+				<table class="w666 no-print">
 					<tr class="cpN">
 						<td class="At Ac">Instruções de Impressão</td>
 					</tr>
@@ -165,14 +201,50 @@
 							</form>
 						</td>
 					</tr>
-				</table><br /><table class="w666">
+				</table><br />
+				<br />
+				<table class='w666'>
 					<tr>
-						<td class="ctN cut" />
+
+						<td style='font:9px arial;'>
+							<div style='font-weight:bolder'>
+								REMETENTE:
+							</div>
+							<div>
+								<%- boleto['cedente'] || '' %>
+							</div>
+							<div>
+								<%- boleto['cedente_endereco_rua_num'] || '' %>
+							</div>
+							<div>
+								<%- boleto['cedente_endereco_bairro'] %>
+							</div>
+							<div>
+								<%- boleto['cedente_endereco_cep'] + "&nbsp;&nbsp;" + boleto['cedente_endereco_cidade_estado'] || "" %>
+							</div>
+						</td>
+						<td style='font:9px arial;'>
+							<div style='font-weight:bolder'>
+								DESTINATÁRIO:
+							</div>
+							<div>
+								<%- boleto['pagador'] || '' %>
+							</div>
+							<div>
+								<%- boleto['pagador_endereco_rua_num'] || '' %>
+							</div>
+							<div>
+								<%- boleto['pagador_endereco_bairro'] %>
+							</div>
+							<div>
+								<%- boleto['pagador_endereco_cep'] + "&nbsp;&nbsp;" + boleto['pagador_endereco_cidade_estado'] || "" %>
+							</div>
+						</td>
 					</tr>
-					<tr>
-						<td class="cpN Ar">Recibo do Pagador</td>
-					</tr>
-				</table><br /><table class="w666">
+				</table>
+
+				<br /><br /><br /><br />
+				<table class="w666">
 					<tr class="BHead">
 						<td class="imgLogo Al"><img src="<%= logoURL %>" /></td>
 						<td class="barra"></td>
@@ -204,7 +276,7 @@
 					</tr>
 					<tr class="cp h12 rBb">
 						<td><%= addTrailingZeros(boleto['numero_documento'], 9) %></td>
-						<td><%= boleto['cedente_cnpj'] %></td>
+						<td><%= boleto['cedente_cnpj'].replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1 $2 $3/$4-$5") %></td>
 						<td><%= formatDate(boleto['data_vencimento']) %></td>
 						<td class="Ar"><%= formatAmount(boleto['valor']) %></td>
 					</tr>
@@ -225,20 +297,36 @@
 					</tr>
 				</table><table class="w666">
 					<tr class="ct h13">
-						<td class="w659">Pagador</td>
+						<td colspan="2">Pagador</td>
 					</tr>
 					<tr class="cp h12">
-						<td class="At"><%- boleto['pagador']  + ' - CPF/CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %></td>
+						<td class="At w478" colspan="2"><%- boleto['pagador'] || '' %></td>
+						<td class='Ar w186' style='border-left:0'>
+							<% if(boleto['pagador_pessoa'] == 'fisica'){ %>
+							<%- 'CPF:' + boleto['pagador_cpf_cnpj'] || '' %>
+							<% }else{ %>
+							<%- 'CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %>
+							<% } %>
+						</td>
 					</tr>
 					<tr class="cp h12">
-						<td class='At'>
+						<td class='At' style='width:280px;'>
 							<%- boleto['pagador_endereco_rua_num'] || '' %>
+						</td>
+						<td class='Ar' style='198px; border-left:0'>
+							<%- boleto['pagador_endereco_bairro'] || '' %>
+						</td>
+						<td class='Ar w186' style='border-left:0'>
+							<%- boleto['pagador_outras_informacoes'] || '' %>
 						</td>
 					</tr>
 					<tr class="cp h12 BB">
+						<td class='At' colspan="2">
+							<span class='Al' style='float:left'><%- boleto['pagador_endereco_cep'] || '' %></span>
+							<span class='Ar' style='float:right'><%- boleto['pagador_endereco_cidade_estado'] || '' %></span>
+						</td>
 
-						<td class='At'>
-							<%- boleto['pagador_endereco_cep'] + ' ' + boleto['pagador_endereco_cidade_estado'] || '' %>
+						<td class='w186' style='border-left:0'>
 						</td>
 					</tr>
 				</table><table class="w666">
@@ -250,14 +338,14 @@
 						<td class="pL6"><%- boleto['instrucoes'] || '' %></td>
 						<td class="pL6 Ar"></td>
 					</tr>
-				</table><table class="ctN w666">
+				</table><br /><table class="ctN w666">
 					<tr class="h13"><td /></tr>
 					<tr class="h13"><td /></tr>
 					<tr><td class="Ar">Corte na linha pontilhada</td></tr>
 					<tr><td class="cut" /></tr>
 					<tr class="h13"><td /></tr>
 					<tr class="h13"><td /></tr>
-				</table><table class="w666">
+				</table><br /><table class="w666">
 					<tr class="BHead">
 						<td class="imgLogo Al"><img src="<%= logoURL %>" /></td>
 						<td class="barra"></td>
@@ -338,19 +426,36 @@
 					</tr>
 				</table><table class="w666">
 					<tr class="ct h13">
-						<td class="w659">Pagador</td>
+						<td colspan="2">Pagador</td>
 					</tr>
 					<tr class="cp h12">
-						<td class="At"><%- boleto['pagador']  + ' - CPF/CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %></td>
-					</tr>
-					<tr class="cp h12">
-						<td class='At'>
-							<%- boleto['pagador_endereco_rua_num'] || '' %>
+						<td class="At w478" colspan="2"><%- boleto['pagador'] || '' %></td>
+						<td class='Ar w186' style='border-left:0'>
+							<% if(boleto['pagador_pessoa'] == 'fisica'){ %>
+							<%- 'CPF:' + boleto['pagador_cpf_cnpj'] || '' %>
+							<% }else{ %>
+							<%- 'CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %>
+							<% } %>
 						</td>
 					</tr>
 					<tr class="cp h12">
-						<td class='At'>
-							<%- boleto['pagador_endereco_cep'] + ' ' + boleto['pagador_endereco_cidade_estado'] || '' %>
+						<td class='At' style='width:280px;'>
+							<%- boleto['pagador_endereco_rua_num'] || '' %>
+						</td>
+						<td class='Ar' style='198px; border-left:0'>
+							<%- boleto['pagador_endereco_bairro'] || '' %>
+						</td>
+						<td class='Ar w186' style='border-left:0'>
+							<%- boleto['pagador_outras_informacoes'] || '' %>
+						</td>
+					</tr>
+					<tr class="cp h12">
+						<td class='At' colspan="2">
+							<span class='Al' style='float:left'><%- boleto['pagador_endereco_cep'] || '' %></span>
+							<span class='Ar' style='float:right'><%- boleto['pagador_endereco_cidade_estado'] || '' %></span>
+						</td>
+
+						<td class='w186' style='border-left:0'>
 						</td>
 					</tr>
 				</table><table class="w666">
@@ -405,10 +510,6 @@
 							<% } %>
 						</td>
 					</tr>
-				</table><table class="ctN w666">
-					<tr class="h13"><td /></tr>
-					<tr><td class="Ar">Corte na linha pontilhada</td></tr>
-					<tr><td class="cut" /></tr>
 				</table>
 				<table class="ctN w666">
 					<tr class="h13"><td /></tr>

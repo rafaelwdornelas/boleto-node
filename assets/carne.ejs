@@ -351,6 +351,7 @@
 				{
 					display: none !important;
 				}
+				@page{margin-top:0; margin-bottom: 0;}
 			}
 
 			/* grid */
@@ -402,7 +403,7 @@
 						</form>
 					</td>
 				</tr>
-			</table><br />
+			</table><br /><br />
 			<table style='width:863px;'>
 				<tr>
 					<td class="ctN cut" />
@@ -421,7 +422,7 @@
 						<tr>
 							<td>
 								<div class="titulo">CNPJ</div>
-								<div class="conteudo" style='height:100%;'><%= boleto['cedente_cnpj'] %></div>
+								<div class="conteudo" style='height:100%;'><%= boleto['cedente_cnpj'].replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1 $2 $3/$4-$5") %></div>
 							</td>
 						</tr>
 						<tr>
@@ -652,12 +653,18 @@
 								</td>
 								<td style='border-left:0'>
 									<div class='grid-container'>
-										<div class='row'>
+										<div class='row Ar'>
 											<div class='col-6'>
-												<div class="conteudo">CPF/CNPJ: <%- boleto['pagador_cpf_cnpj'] || '' %></div>
+												<div class="conteudo">
+													<% if(boleto['pagador_pessoa'] == 'fisica'){ %>
+													<%- 'CPF:' + boleto['pagador_cpf_cnpj'] || '' %>
+													<% }else{ %>
+													<%- 'CNPJ:' + boleto['pagador_cpf_cnpj'] || '' %>
+													<% } %>
+												</div>
 											</div>
 										</div>
-										<div class='row'>
+										<div class='row Ar'>
 											<div class="conteudo"><%- boleto['pagador_outras_informacoes'] || '' %></div>
 										</div>
 									</div>

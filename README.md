@@ -42,6 +42,10 @@ var boleto = new Boleto({
 	'pagador_outras_informacoes': 'Login da central: testeteste',
 	'cedente': "PAGAMENTOS LTDA",
 	'cedente_cnpj': "47322759000154", // sem pontos e traços
+	'cedente_endereco_rua_num': "RUA CEL. JONAS DOS SANTOS, 130",
+	'cedente_endereco_bairro': 'CENTRO',
+	'cedente_endereco_cep': '15.115-100',
+	'cedente_endereco_cidade_estado': 'SÃO JOSÉ DOS TESTES - SP',
 	'agencia': "6119",
 	'codigo_cedente':"001.584-2",
 	'carteira': "09"

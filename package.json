@@ -1,19 +1,51 @@
 {
-  "name": "boleto-node",
-  "version": "2.0.4",
-  "description": "Boleto generator in Node.js",
-  "main": "index.js",
-  "scripts": {
-    "lint": "eslint .",
-    "test": "mocha \"./test/unit/**/*.spec.js\" && mocha \"./test/integration/**/*.spec.js\""
+  "_args": [
+    [
+      "boleto-node@^2.0.2",
+      "/home/brunosartori/Documentos/Resources/teste-boleto-node"
+    ]
+  ],
+  "_from": "boleto-node@>=2.0.2 <3.0.0",
+  "_id": "boleto-node@2.0.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/boleto-node",
+  "_nodeVersion": "4.2.6",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/boleto-node-2.0.4.tgz_1496323256362_0.07322262693196535"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bruno-sartori/boleto-node"
+  "_npmUser": {
+    "email": "brunosartori.webmaster@gmail.com",
+    "name": "brunosartori"
+  },
+  "_npmVersion": "3.5.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "boleto-node",
+    "raw": "boleto-node@^2.0.2",
+    "rawSpec": "^2.0.2",
+    "scope": null,
+    "spec": ">=2.0.2 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_shasum": "1701af6121a8b937cce03f0d68841a6b407d461b",
+  "_shrinkwrap": null,
+  "_spec": "boleto-node@^2.0.2",
+  "_where": "/home/brunosartori/Documentos/Resources/teste-boleto-node",
+  "author": {
+    "name": "Bruno Sartori"
+  },
+  "bugs": {
+    "url": "https://github.com/bruno-sartori/boleto-node/issues"
   },
   "dependencies": {
     "ejs": "2.5.5"
   },
+  "description": "Boleto generator in Node.js",
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-datetime": "^1.4.1",
@@ -26,10 +58,31 @@
     "mocha": "^3.2.0",
     "ramda": "^0.23.0"
   },
-  "author": "Bruno Sartori",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bruno-sartori/boleto-node/issues"
+  "directories": {},
+  "dist": {
+    "shasum": "1701af6121a8b937cce03f0d68841a6b407d461b",
+    "tarball": "https://registry.npmjs.org/boleto-node/-/boleto-node-2.0.4.tgz"
   },
-  "homepage": "https://github.com/bruno-sartori/boleto-node"
+  "gitHead": "6bb29d82c73bd4f70768ae224d754df2a15bfcf5",
+  "homepage": "https://github.com/bruno-sartori/boleto-node",
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "brunosartori",
+      "email": "brunosartori.webmaster@gmail.com"
+    }
+  ],
+  "name": "boleto-node",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bruno-sartori/boleto-node.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha \"./test/unit/**/*.spec.js\" && mocha \"./test/integration/**/*.spec.js\""
+  },
+  "version": "2.0.5"
 }
