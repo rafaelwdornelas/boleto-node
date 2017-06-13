@@ -202,7 +202,48 @@
 						</td>
 					</tr>
 				</table><br />
-				
+				<br />
+				<table class='w666'>
+					<tr>
+
+						<td style='font:9px arial;'>
+							<div style='font-weight:bolder'>
+								REMETENTE:
+							</div>
+							<div>
+								<%- boleto['cedente'] || '' %>
+							</div>
+							<div>
+								<%- boleto['cedente_endereco_rua_num'] || '' %>
+							</div>
+							<div>
+								<%- boleto['cedente_endereco_bairro'] %>
+							</div>
+							<div>
+								<%- boleto['cedente_endereco_cep'] + "&nbsp;&nbsp;" + boleto['cedente_endereco_cidade_estado'] || "" %>
+							</div>
+						</td>
+						<td style='font:9px arial;'>
+							<div style='font-weight:bolder'>
+								DESTINATÁRIO:
+							</div>
+							<div>
+								<%- boleto['pagador'] || '' %>
+							</div>
+							<div>
+								<%- boleto['pagador_endereco_rua_num'] || '' %>
+							</div>
+							<div>
+								<%- boleto['pagador_endereco_bairro'] %>
+							</div>
+							<div>
+								<%- boleto['pagador_endereco_cep'] + "&nbsp;&nbsp;" + boleto['pagador_endereco_cidade_estado'] || "" %>
+							</div>
+						</td>
+					</tr>
+				</table>
+
+				<br /><br /><br /><br />
 				<table class="w666">
 					<tr class="BHead">
 						<td class="imgLogo Al"><img src="<%= logoURL %>" /></td>
