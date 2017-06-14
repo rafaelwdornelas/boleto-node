@@ -1,19 +1,19 @@
 {
   "_args": [
     [
-      "boleto-node@^2.0.10",
+      "boleto-node@^2.0.11",
       "/home/brunosartori/Documentos/Resources/teste-boleto-node"
     ]
   ],
-  "_from": "boleto-node@>=2.0.10 <3.0.0",
-  "_id": "boleto-node@2.0.10",
+  "_from": "boleto-node@>=2.0.11 <3.0.0",
+  "_id": "boleto-node@2.0.11",
   "_inCache": true,
   "_installable": true,
   "_location": "/boleto-node",
   "_nodeVersion": "4.2.6",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/boleto-node-2.0.10.tgz_1496323256362_0.07322262693196535"
+    "tmp": "tmp/boleto-node-2.0.11.tgz_1496323256362_0.07322262693196535"
   },
   "_npmUser": {
     "email": "brunosartori.webmaster@gmail.com",
@@ -23,10 +23,10 @@
   "_phantomChildren": {},
   "_requested": {
     "name": "boleto-node",
-    "raw": "boleto-node@^2.0.10",
-    "rawSpec": "^2.0.10",
+    "raw": "boleto-node@^2.0.11",
+    "rawSpec": "^2.0.11",
     "scope": null,
-    "spec": ">=2.0.10 <3.0.0",
+    "spec": ">=2.0.11 <3.0.0",
     "type": "range"
   },
   "_requiredBy": [
@@ -34,7 +34,7 @@
   ],
   "_shasum": "1701af6121a8b937cce03f0d68841a6b407d461b",
   "_shrinkwrap": null,
-  "_spec": "boleto-node@^2.0.10",
+  "_spec": "boleto-node@^2.0.11",
   "_where": "/home/brunosartori/Documentos/Resources/teste-boleto-node",
   "author": {
     "name": "Bruno Sartori"
@@ -84,5 +84,5 @@
     "lint": "eslint .",
     "test": "mocha \"./test/unit/**/*.spec.js\" && mocha \"./test/integration/**/*.spec.js\""
   },
-  "version": "2.0.10"
+  "version": "2.0.11"
 }
