@@ -1,3 +1,5 @@
+<% if(render_headers === true){ %>
+
 <!DOCTYPE html>
 <!--
 * OpenBoleto - Geração de boletos bancários em PHP
@@ -387,7 +389,6 @@
 			</style>
 		</head>
 		<body>
-
 			<table style='width:863px;' class='no-print'>
 				<tr class="cpN">
 					<td class="At Ac">Instruções de Impressão</td>
@@ -401,16 +402,19 @@
 						<form>
 							<input class="no-print" type="button" value="Clique aqui para imprimir" onclick="window.print();return false;" />
 						</form>
+						<br /><br />
 					</td>
 				</tr>
-			</table><br /><br />
+			</table>
 			<table style='width:863px;'>
 				<tr>
 					<td class="ctN cut" />
 				</tr>
 			</table>
+			 <% } %>
+
 			<div style="width: 863px">
-				<div style="float: left; margin-top:6px;">
+				<div style="float: left; margin-top:18px;">
 					<span class="header">Recibo do Sacado</span>
 					<table class="table-boleto" style="width: 180px" cellpadding="0" cellspacing="0" border="0">
 						<tr>
@@ -487,7 +491,7 @@
 						</tr>
 					</table>
 				</div>
-				<div style="float: left; margin-left: 8px; padding-left:7px; border-left:1px dashed #000;">
+				<div style="float: left; margin-left: 8px; padding-left:7px; border-left:1px dashed #000; padding-top:11px">
 					<table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
 						<tbody>
 							<tr>
@@ -727,7 +731,7 @@
 									<td class="ctN cut" />
 								</tr>
 							</table>
-							<div class="corte-linha-pontilhada">Corte na linha pontilhada</div>
+							<!-- <div class="corte-linha-pontilhada">Corte na linha pontilhada</div> -->
 						</div>
 					</body>
 					</html>

@@ -51,12 +51,54 @@ var boleto = new Boleto({
 	'carteira': "09"
 });
 
-console.log("Linha digitável: " + boleto['linha_digitavel'])
-
-boleto.renderHTML('boleto', function(html){ // layout do boleto: boleto ou carne
+boleto.renderHTML('boleto', true, function(html){ // layout do boleto: boleto ou carne
   console.log(html);
 });
 ```
+
+Renderizando multiplos carnês:
+
+```javascript
+var Boleto = require('boleto-node').Boleto
+,	 response = '';
+
+for(var i = 0; i < 3; i++){
+	var boleto = new Boleto({
+		'banco': 'bradesco', // nome do banco dentro da pasta 'banks'
+		'data_emissao': new Date(),
+	   'data_vencimento': new Date(new Date().getTime() + 5 * 24 * 3600 * 1000), // 5 dias futuramente
+		'valor': 8990, // R$ 15,00 (valor em centavos)
+		'nosso_numero': "1234567",
+		'numero_documento': "123123",
+		'instrucoes': "Não receber após vencimento. \n Multa de 2% após o vencimento. Juros de 0,03% de mora ao dia.", // separar cada linha por \n
+		'pagador': "TESTE DA SILVA",
+		'pagador_cpf_cnpj': '288.664.364-53',
+		'pagador_endereco_rua_num': 'RUA SÃO CARLOS AUGUSTINO DA SILVA, 50',
+		'pagador_endereco_bairro': 'SÃO JOÃO BATISTA DA SILVA',
+		'pagador_endereco_cep': '15.160-100',
+		'pagador_endereco_cidade_estado': 'SÃO JOSÉ DOS TESTES - SP',
+		'pagador_outras_informacoes': 'Login da central: testeteste',
+		'cedente': "PAGAMENTOS LTDA",
+		'cedente_cnpj': "47322759000154", // sem pontos e traços
+		'cedente_endereco_rua_num': "RUA CEL. JONAS DOS SANTOS, 130",
+		'cedente_endereco_bairro': 'CENTRO',
+		'cedente_endereco_cep': '15.115-100',
+		'cedente_endereco_cidade_estado': 'SÃO JOSÉ DOS TESTES - SP',
+		'agencia': "6119",
+		'codigo_cedente':"001.584-2",
+		'carteira': "09"
+	});
+
+	var render_headers = (i == 0) ? true : false;
+
+	boleto.renderHTML('boleto', render_headers, function(html){ // layout do boleto: boleto ou carne | render_headers: define se as instruções de impressão ou css serão renderizadas.
+	  response  = response + html;
+	});
+}
+
+res.send(response);
+```
+
 
 Parseando o arquivo-retorno EDI do banco:
 
